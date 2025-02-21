@@ -28,10 +28,21 @@ public class GUI extends JFrame {
         setSize(500, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+<<<<<<< HEAD
+        getContentPane().setBackground(Color.WHITE);
+        
+      
+        //backgroundLabel.setLayout(new GridBagLayout());
+        //add(backgroundLabel, BorderLayout.CENTER);
+        
+      
+        JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 15, 105));
+=======
         getContentPane().setBackground(Color.WHITE); 
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(3, 1, 10, 10));
+>>>>>>> 6f76a97ea5f21175650504ec49215ac4d021fd71
         buttonPanel.setOpaque(false);
 
         JButton facebookButton = new JButton("FACEBOOK");
@@ -70,11 +81,26 @@ public class GUI extends JFrame {
 
         buttonPanel.add(facebookButton);
         buttonPanel.add(twitterButton);
+<<<<<<< HEAD
         buttonPanel.add(PrintButton);
+=======
+        buttonPanel.add(uberSocialButton);
+<<<<<<< HEAD
+        
+      
+        //backgroundLabel.add(buttonPanel);
+    }
+
+
+
+}
+=======
+>>>>>>> 93e6ca32814840710e5205ccb022bc6cd5149a8a
 
         add(buttonPanel, BorderLayout.CENTER);
     }
 }
 
+>>>>>>> 6f76a97ea5f21175650504ec49215ac4d021fd71
     
 
