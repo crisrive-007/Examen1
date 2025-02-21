@@ -39,8 +39,15 @@ import java.util.ArrayList;
    
    //3
       
-      public void agregarPost(){}
-   
+      public void agregarPost(String user, String post) {
+          if (buscar(user) != null) {
+              buscar(user).addPost(post);
+          } else {
+              
+          }
+      }
+      
+      
    
    
    
