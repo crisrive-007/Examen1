@@ -20,8 +20,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class GUI extends JFrame {
+
     private JPanel panel;
     private JPanel panelBotones;
+    UberSocial us = new UberSocial();
 
     public GUI() {
         setTitle("Redes Sociales");
@@ -30,12 +32,10 @@ public class GUI extends JFrame {
         setLayout(new BorderLayout());
         getContentPane().setBackground(Color.WHITE);
 
-       
         JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 10, 10));
         buttonPanel.setOpaque(false);
 
-        
-       JButton facebookButton = new JButton("FACEBOOK");
+        JButton facebookButton = new JButton("FACEBOOK");
         facebookButton.setBackground(new Color(255, 102, 102));
         facebookButton.setFont(new Font("Arial", Font.BOLD, 16));
         facebookButton.addActionListener(new ActionListener() {
@@ -46,7 +46,6 @@ public class GUI extends JFrame {
             }
         });
 
-      
         JButton twitterButton = new JButton("TWITTER");
         twitterButton.setBackground(new Color(255, 102, 102));
         twitterButton.setFont(new Font("Arial", Font.BOLD, 16));
@@ -59,29 +58,34 @@ public class GUI extends JFrame {
             }
         });
 
-      
         JButton printButton = new JButton("IMPRIMIR");
         printButton.setBackground(new Color(255, 102, 102));
         printButton.setFont(new Font("Arial", Font.BOLD, 16));
         printButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                String usuario = JOptionPane.showInputDialog("Ingresa el nombre del usuario que deseas imprimir la informacion.");
+                SocialClass user = us.buscar(usuario);
+                if (user != null) {
+                    user.myProfile();
+                    user.timeline();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Este usuario no existe.");
+                }
+
                 JOptionPane.showMessageDialog(null, "Imprimir perfiles y timelines");
                 
             }
         });
 
-     
         buttonPanel.add(facebookButton);
         buttonPanel.add(twitterButton);
         buttonPanel.add(printButton);
 
-      
         add(buttonPanel, BorderLayout.CENTER);
-        
-     
+
         setVisible(true);
     }
 
 }
-

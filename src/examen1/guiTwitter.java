@@ -97,7 +97,7 @@ public class guiTwitter extends JFrame {
 
                 for (String friend : user.friends) {
                     if (friend.equals(friendName)) {
-                        JOptionPane.showMessageDialog(null, "Este amigo ya está agregado.");
+                        JOptionPane.showMessageDialog(null, "Este amigo ya está agregado.");
                         return;
                     }
                 }
