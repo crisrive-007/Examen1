@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author 50494
  */
 public abstract class SocialClass {
-    private String username;
+    protected String username;
     protected ArrayList <String> friends = new ArrayList<>();
     protected ArrayList <String> posts = new ArrayList<>();
 
