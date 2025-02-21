@@ -18,32 +18,32 @@ import javax.swing.JPanel;
  *
  * @author 50494
  */
-public class guiTwitter extends JFrame{
-    
+public class guiTwitter extends JFrame {
+
     private JPanel panel;
     private JPanel panelBotones;
-    UberSocial us=new UberSocial();
+    UberSocial us = new UberSocial();
     public String usuario;
-    
-    public guiTwitter(){
-    this.setSize(712, 506);
+
+    public guiTwitter() {
+        this.setSize(712, 506);
         setTitle("Twitter");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         iniciarComponentes();
-    
+
     }
-    
-    public void iniciarComponentes(){
-    
-     panel = new JPanel();
+
+    public void iniciarComponentes() {
+
+        panel = new JPanel();
         panel.setLayout(null);
         colocarBotones();
         panel.setBackground(Color.WHITE);
         this.getContentPane().add(panel);
-    
+
     }
-    
+
     public void colocarBotones() {
 
         JLabel etiqueta = new JLabel("Twitter");
@@ -66,11 +66,14 @@ public class guiTwitter extends JFrame{
         agregar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                usuario = JOptionPane.showInputDialog(null,  "\nIngresa usuario:");
-                us.agregarCuenta(usuario, "TWITTER");
-                
-                
+                usuario = JOptionPane.showInputDialog("Escriba su usuario:");
+                SocialClass user = us.buscar(usuario);
+                if (user == null) {
+                    us.agregarCuenta(usuario, "TWITTER");
+                    JOptionPane.showMessageDialog(null, "Se ha agregado a al usuario " + usuario + ".");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Este usuario ya existe.");
+                }
             }
         });
 
@@ -100,7 +103,7 @@ public class guiTwitter extends JFrame{
         post.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
             }
         });
 
@@ -118,5 +121,5 @@ public class guiTwitter extends JFrame{
         });
 
     }
-    
+
 }

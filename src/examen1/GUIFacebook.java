@@ -4,21 +4,16 @@
  */
 package examen1;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 /**
  *
@@ -28,15 +23,14 @@ public class GUIFacebook extends JFrame{
     
      private JPanel panel;
      private JPanel panelBotones;
-     private ArrayList<String> FacebookAccounts;
-     private ArrayList<String> FacebookFriends = new ArrayList();
+     UberSocial us = new UberSocial();
+     public String usuario;
 
     public GUIFacebook() {
         this.setSize(712, 506);
         setTitle("Facebook");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        FacebookAccounts = new ArrayList<>();
         iniciarComponentes();
         setVisible(true);
     }
@@ -68,16 +62,13 @@ public class GUIFacebook extends JFrame{
         agregar.setBackground(Color.CYAN);
         panelBotones.add(agregar);
        agregar.addActionListener(e -> {
-            String username = JOptionPane.showInputDialog("Escriba su usuario:");
-            UberSocial social = new UberSocial();
-            SocialClass usuario = social.buscar(username);
-            if (usuario == null) {
-                if (FacebookAccounts.contains(username)) {
-                    JOptionPane.showMessageDialog(null, "Ese usuario ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    FacebookAccounts.add(username);
-                    JOptionPane.showMessageDialog(null, "Cuenta agregada: " + username);
-                }
+            usuario = JOptionPane.showInputDialog("Escriba su usuario:");
+            SocialClass user = us.buscar(usuario);
+            if (user == null) {
+                us.agregarCuenta(usuario, "FACEBOOK");
+                JOptionPane.showMessageDialog(null, "Se ha agregado a al usuario " + usuario +".");
+            } else {
+                JOptionPane.showMessageDialog(null, "Este usuario ya existe.");
             }
         });
 
@@ -89,13 +80,23 @@ public class GUIFacebook extends JFrame{
        
         amigos.addActionListener(e -> {
             String friendName = JOptionPane.showInputDialog("Ingrese el nombre del amigo:");
+            SocialClass user = us.buscar(usuario);
+
             if (friendName != null && !friendName.trim().isEmpty()) {
-                if (FacebookFriends.contains(friendName)) {
-                    JOptionPane.showMessageDialog(null, "Ese amigo ya está agregado.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    FacebookFriends.add(friendName);
-                    JOptionPane.showMessageDialog(null, "Amigo agregado: " + friendName);
+                if (friendName.equals(usuario)) {
+                    JOptionPane.showMessageDialog(null, "No se puede agregar al mismo usuario actual.");
+                    return;
                 }
+
+                for (String friend : user.friends) {
+                    if (friend.equals(friendName)) {
+                        JOptionPane.showMessageDialog(null, "Este amigo ya está agregado.");
+                        return;
+                    }
+                }
+
+                user.friends.add(friendName);
+                JOptionPane.showMessageDialog(null, "Se ha agregado a " + friendName + " como amigo.");
             }
         });
 
@@ -105,6 +106,13 @@ public class GUIFacebook extends JFrame{
         post.setFont(new Font("Tahoma", Font.BOLD, 18));
         post.setBackground(Color.CYAN);
         panelBotones.add(post);
+        
+        post.addActionListener(e -> {
+            String mensaje = JOptionPane.showInputDialog("Agrega un mensaje.");
+            SocialClass user = us.buscar(usuario);
+            
+            user.addPost(mensaje);
+        });
 
         JButton salir = new JButton("Salir");
         salir.setBounds(400, 300, 214, 46);
@@ -115,6 +123,7 @@ public class GUIFacebook extends JFrame{
         salir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                new GUI();
                 dispose();
             }
         });

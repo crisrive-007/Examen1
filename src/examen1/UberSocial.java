@@ -73,7 +73,7 @@ public class UberSocial {
     }
     
     public void profileFrom(String user) {
-        
+        SocialClass usuario = buscar(user);
+       usuario.myProfile();
     }
-
 }
