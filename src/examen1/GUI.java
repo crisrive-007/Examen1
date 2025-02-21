@@ -42,6 +42,7 @@ public class GUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new GUIFacebook();
+                dispose();
             }
         });
 
@@ -52,7 +53,9 @@ public class GUI extends JFrame {
         twitterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Twitter seleccionado");
+                guiTwitter tw = new guiTwitter();
+                tw.setVisible(true);
+                dispose();
             }
         });
 

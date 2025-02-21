@@ -4,58 +4,53 @@
  */
 package examen1;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 /**
  *
  * @author 50494
  */
-public class GUIFacebook extends JFrame{
+public class guiTwitter extends JFrame{
     
-     private JPanel panel;
-     private JPanel panelBotones;
-     private ArrayList<String> FacebookAccounts;
-     private ArrayList<String> FacebookFriends = new ArrayList();
-
-    public GUIFacebook() {
-        this.setSize(712, 506);
-        setTitle("Facebook");
+    private JPanel panel;
+    private JPanel panelBotones;
+    UberSocial us=new UberSocial();
+    public String usuario;
+    
+    public guiTwitter(){
+    this.setSize(712, 506);
+        setTitle("Twitter");
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        FacebookAccounts = new ArrayList<>();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         iniciarComponentes();
-        setVisible(true);
+    
     }
     
-    public void iniciarComponentes() {
-        panel = new JPanel();
+    public void iniciarComponentes(){
+    
+     panel = new JPanel();
         panel.setLayout(null);
         colocarBotones();
         panel.setBackground(Color.WHITE);
         this.getContentPane().add(panel);
+    
     }
     
     public void colocarBotones() {
-        JLabel etiqueta = new JLabel("Facebook");
-        panel.add(etiqueta);
-        etiqueta.setBounds(290, 65, 300, 50);
-        etiqueta.setForeground(Color.BLACK);
+
+        JLabel etiqueta = new JLabel("Twitter");
+        panel.add(etiqueta);//agregar etiqueta al panel
+        etiqueta.setBounds(290, 65, 300, 50);//tamaño y posición de la etiqueta
+        etiqueta.setForeground(Color.BLACK);//ponerle color a las letras 
         etiqueta.setFont(new Font("Tahoma", Font.BOLD, 36));
-        
 
         panelBotones = new JPanel();
         panelBotones.setLayout(null);
@@ -67,17 +62,15 @@ public class GUIFacebook extends JFrame{
         agregar.setFont(new Font("Tahoma", Font.BOLD, 18));
         agregar.setBackground(Color.CYAN);
         panelBotones.add(agregar);
-       agregar.addActionListener(e -> {
-            String username = JOptionPane.showInputDialog("Escriba su usuario:");
-            UberSocial social = new UberSocial();
-            SocialClass usuario = social.buscar(username);
-            if (usuario == null) {
-                if (FacebookAccounts.contains(username)) {
-                    JOptionPane.showMessageDialog(null, "Ese usuario ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    FacebookAccounts.add(username);
-                    JOptionPane.showMessageDialog(null, "Cuenta agregada: " + username);
-                }
+
+        agregar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                usuario = JOptionPane.showInputDialog(null,  "\nIngresa usuario:");
+                us.agregarCuenta(usuario, "TWITTER");
+                
+                
             }
         });
 
@@ -86,19 +79,17 @@ public class GUIFacebook extends JFrame{
         amigos.setFont(new Font("Tahoma", Font.BOLD, 18));
         amigos.setBackground(Color.CYAN);
         panelBotones.add(amigos);
-       
-        amigos.addActionListener(e -> {
-            String friendName = JOptionPane.showInputDialog("Ingrese el nombre del amigo:");
-            if (friendName != null && !friendName.trim().isEmpty()) {
-                if (FacebookFriends.contains(friendName)) {
-                    JOptionPane.showMessageDialog(null, "Ese amigo ya está agregado.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    FacebookFriends.add(friendName);
+
+        amigos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String friendName = JOptionPane.showInputDialog("Ingrese el nombre del amigo:");
+                if (friendName != null && !friendName.trim().isEmpty()) {
+                    us.agregarAmigo(usuario, friendName);
                     JOptionPane.showMessageDialog(null, "Amigo agregado: " + friendName);
                 }
             }
         });
-
 
         JButton post = new JButton("Agregar post");
         post.setBounds(100, 300, 214, 46);
@@ -106,7 +97,14 @@ public class GUIFacebook extends JFrame{
         post.setBackground(Color.CYAN);
         panelBotones.add(post);
 
-        JButton salir = new JButton("Salir");
+        post.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+
+        JButton salir = new JButton("salir");
         salir.setBounds(400, 300, 214, 46);
         salir.setFont(new Font("Tahoma", Font.BOLD, 24));
         salir.setBackground(Color.CYAN);
@@ -115,7 +113,10 @@ public class GUIFacebook extends JFrame{
         salir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                System.exit(0);
             }
         });
-    }}
+
+    }
+    
+}
