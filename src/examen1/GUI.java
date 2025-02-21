@@ -30,8 +30,8 @@ public class GUI extends JFrame {
         getContentPane().setBackground(Color.WHITE);
         
       
-        backgroundLabel.setLayout(new GridBagLayout());
-        add(backgroundLabel, BorderLayout.CENTER);
+        //backgroundLabel.setLayout(new GridBagLayout());
+        //add(backgroundLabel, BorderLayout.CENTER);
         
       
         JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 15, 105));
@@ -67,7 +67,11 @@ public class GUI extends JFrame {
         buttonPanel.add(uberSocialButton);
         
       
-        backgroundLabel.add(buttonPanel);
-    }}
+        //backgroundLabel.add(buttonPanel);
+    }
+
+
+
+}
     
 
