@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -33,20 +35,42 @@ public class GUI extends JFrame {
         buttonPanel.setOpaque(false);
 
         JButton facebookButton = new JButton("FACEBOOK");
-        facebookButton.setBackground(new Color(51, 153, 255));
+        facebookButton.setBackground(new Color(255, 102, 102));
         facebookButton.setFont(new Font("Arial", Font.BOLD, 16));
+        
+        facebookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
 
         JButton twitterButton = new JButton("TWITTER");
-        twitterButton.setBackground(new Color(255, 102, 0));
+        twitterButton.setBackground(new Color(255, 102, 102));
         twitterButton.setFont(new Font("Arial", Font.BOLD, 16));
+      
+        twitterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
 
-        JButton uberSocialButton = new JButton("UBERSOCIAL");
-        uberSocialButton.setBackground(new Color(255, 51, 51));
-        uberSocialButton.setFont(new Font("Arial", Font.BOLD, 16));
+        JButton PrintButton = new JButton("IMPRIMIR");
+        PrintButton.setBackground(new Color(255, 102, 102));
+        PrintButton.setFont(new Font("Arial", Font.BOLD, 16));
+        
+        PrintButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+
 
         buttonPanel.add(facebookButton);
         buttonPanel.add(twitterButton);
-        buttonPanel.add(uberSocialButton);
+        buttonPanel.add(PrintButton);
 
         add(buttonPanel, BorderLayout.CENTER);
     }

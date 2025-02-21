@@ -14,7 +14,8 @@ public class Examen1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      new GUI().setVisible(true);
+      GUI m = new GUI();
+        m.setVisible(true);
     }
     
 }
