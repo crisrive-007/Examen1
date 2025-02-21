@@ -87,10 +87,24 @@ public class guiTwitter extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String friendName = JOptionPane.showInputDialog("Ingrese el nombre del amigo:");
-                if (friendName != null && !friendName.trim().isEmpty()) {
-                    us.agregarAmigo(usuario, friendName);
-                    JOptionPane.showMessageDialog(null, "Amigo agregado: " + friendName);
+            SocialClass user = us.buscar(usuario);
+
+            if (friendName != null && !friendName.trim().isEmpty()) {
+                if (friendName.equals(usuario)) {
+                    JOptionPane.showMessageDialog(null, "No se puede agregar al mismo usuario actual.");
+                    return;
                 }
+
+                for (String friend : user.friends) {
+                    if (friend.equals(friendName)) {
+                        JOptionPane.showMessageDialog(null, "Este amigo ya está agregado.");
+                        return;
+                    }
+                }
+
+                user.friends.add(friendName);
+                JOptionPane.showMessageDialog(null, "Se ha agregado a " + friendName + " como amigo.");
+            }
             }
         });
 
@@ -103,7 +117,10 @@ public class guiTwitter extends JFrame {
         post.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                 String mensaje = JOptionPane.showInputDialog("Agrega un mensaje.");
+            SocialClass user = us.buscar(usuario);
+            
+            user.addPost(mensaje);
             }
         });
 
